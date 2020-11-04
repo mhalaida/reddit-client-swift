@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XwP-GQ-raj" userLabel="PostView">
-                                <rect key="frame" x="5" y="288" width="404" height="330"/>
+                                <rect key="frame" x="5" y="285.5" width="404" height="335"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LTg-qg-use" userLabel="PostStackView">
-                                        <rect key="frame" x="5" y="5" width="394" height="320"/>
+                                        <rect key="frame" x="5" y="5" width="394" height="325"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="iyf-lA-eXQ" userLabel="PostHeaderView">
                                                 <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
@@ -124,32 +124,32 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="center" distribution="equalCentering" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="jDT-1n-MZm" userLabel="PostFooterStackView">
-                                                <rect key="frame" x="0.0" y="290" width="394" height="30"/>
+                                                <rect key="frame" x="0.0" y="290" width="394" height="35"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKD-Y4-qK5" userLabel="RatingStackView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="108" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="118" height="35"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j6I-Hl-Y4J" userLabel="UpvoteButton">
-                                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="30" id="Msy-AZ-NaD"/>
-                                                                    <constraint firstAttribute="height" constant="30" id="Ue1-ft-CTp"/>
+                                                                    <constraint firstAttribute="width" constant="35" id="Msy-AZ-NaD"/>
+                                                                    <constraint firstAttribute="height" constant="35" id="Ue1-ft-CTp"/>
                                                                 </constraints>
                                                                 <color key="tintColor" systemColor="systemOrangeColor"/>
                                                                 <state key="normal" image="arrowtriangle.up" catalog="system"/>
                                                                 <state key="selected" image="arrowtriangle.up.fill" catalog="system"/>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999.7k" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFy-72-1iZ" userLabel="RatingLabel">
-                                                                <rect key="frame" x="30" y="0.0" width="48" height="30"/>
+                                                                <rect key="frame" x="35" y="0.0" width="48" height="35"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUb-W2-BLz" userLabel="DownvoteButton">
-                                                                <rect key="frame" x="78" y="0.0" width="30" height="30"/>
+                                                                <rect key="frame" x="83" y="0.0" width="35" height="35"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="30" id="mrN-4Z-KfU"/>
-                                                                    <constraint firstAttribute="width" constant="30" id="x1W-CH-xdm"/>
+                                                                    <constraint firstAttribute="height" constant="35" id="mrN-4Z-KfU"/>
+                                                                    <constraint firstAttribute="width" constant="35" id="x1W-CH-xdm"/>
                                                                 </constraints>
                                                                 <color key="tintColor" systemColor="systemOrangeColor"/>
                                                                 <state key="normal" image="arrowtriangle.down" catalog="system"/>
@@ -157,15 +157,15 @@
                                                             </button>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="108" id="B7w-oZ-cFA"/>
-                                                            <constraint firstAttribute="height" constant="30" id="UbW-Xb-Iwa"/>
+                                                            <constraint firstAttribute="width" constant="118" id="B7w-oZ-cFA"/>
+                                                            <constraint firstAttribute="height" constant="35" id="UbW-Xb-Iwa"/>
                                                         </constraints>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ron-Sk-1cX" userLabel="CommentsButton">
-                                                        <rect key="frame" x="164" y="0.0" width="70" height="30"/>
+                                                        <rect key="frame" x="161.5" y="0.0" width="75" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="1Sk-ew-XDY"/>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="juP-4u-yu2"/>
+                                                            <constraint firstAttribute="height" constant="35" id="1Sk-ew-XDY"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="juP-4u-yu2"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="tintColor" systemColor="systemOrangeColor"/>
@@ -175,13 +175,13 @@
                                                         </state>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRU-wj-VHU" userLabel="ShareSaveStackView">
-                                                        <rect key="frame" x="294" y="0.0" width="100" height="30"/>
+                                                        <rect key="frame" x="284" y="0.0" width="110" height="35"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVv-pS-XP7" userLabel="ShareButton">
-                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="55" height="35"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="30" id="0K7-Ag-S5p"/>
-                                                                    <constraint firstAttribute="width" constant="50" id="wUn-9N-rs9"/>
+                                                                    <constraint firstAttribute="height" constant="35" id="0K7-Ag-S5p"/>
+                                                                    <constraint firstAttribute="width" constant="55" id="wUn-9N-rs9"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <color key="tintColor" systemColor="systemOrangeColor"/>
@@ -190,10 +190,10 @@
                                                                 </state>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0s-H2-dXI" userLabel="SaveButton">
-                                                                <rect key="frame" x="50" y="0.0" width="50" height="30"/>
+                                                                <rect key="frame" x="55" y="0.0" width="55" height="35"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="30" id="MOI-pJ-mDf"/>
-                                                                    <constraint firstAttribute="width" constant="50" id="f8v-6b-feG"/>
+                                                                    <constraint firstAttribute="height" constant="35" id="MOI-pJ-mDf"/>
+                                                                    <constraint firstAttribute="width" constant="55" id="f8v-6b-feG"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <color key="tintColor" systemColor="systemOrangeColor"/>
@@ -206,7 +206,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="separatorColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="DNe-PF-a2h"/>
+                                                    <constraint firstAttribute="height" constant="35" id="DNe-PF-a2h"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -246,7 +246,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
                             <constraint firstItem="XwP-GQ-raj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="D87-8i-QiH"/>
                             <constraint firstItem="XwP-GQ-raj" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="E2Y-1h-END"/>
@@ -274,8 +274,8 @@
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

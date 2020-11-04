@@ -20,10 +20,10 @@ class RedditRepository {
         })
     }
     
-    static func decode(respData: Data) -> RedditResponse? {
+    static func decode(respData: Data) -> RedditResponseRaw? {
         let jsonDecoder = JSONDecoder();
         do {
-            let parsedJSON = try jsonDecoder.decode(RedditResponse.self, from: respData);
+            let parsedJSON = try jsonDecoder.decode(RedditResponseRaw.self, from: respData);
             return parsedJSON;
         } catch {
             print(error);
@@ -33,7 +33,7 @@ class RedditRepository {
     
 }
 
-struct RedditResponse: Decodable {
+struct RedditResponseRaw: Decodable {
     var data: DataStruct
     struct DataStruct: Decodable {
         var children: [ItemStruct]
