@@ -9,6 +9,13 @@ import Foundation
 
 class RedditRepository {
     
+    static func getData() -> RedditResponseRaw {
+        guard let result = decode(respData: PersistenceManager.shared.cachedResp) else {
+            return RedditResponseRaw(data: RedditResponseRaw.DataStruct(children: []))
+        }
+        return result;
+    }
+    
     static func getTop10Posts(subreddit: String, completion: @escaping (Bool) -> Void) {
         // ... sending the request, waiting till the response is written to the DB, after which completion handler:
         HTTPService.makeRequest(source: HTTPSource.Reddit(subreddit: subreddit, listingType: "top", limit: 10, after: nil), completion: { (success) -> Void in

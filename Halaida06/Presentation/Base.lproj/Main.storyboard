@@ -31,32 +31,32 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8rh-b0-YuC" userLabel="AuthorTimeStack">
                                                                 <rect key="frame" x="5" y="0.0" width="384" height="25"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" verticalHuggingPriority="251" text="u/bruh_bruhson228" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWA-ZC-Xca" userLabel="AuthorLabel">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWA-ZC-Xca" userLabel="AuthorLabel">
                                                                         <rect key="frame" x="0.0" y="0.0" width="128.5" height="25"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="259" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzQ-vT-gfD" userLabel="Separator1">
-                                                                        <rect key="frame" x="133.5" y="0.0" width="8" height="25"/>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="259" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzQ-vT-gfD" userLabel="Separator1">
+                                                                        <rect key="frame" x="131" y="0.0" width="0.0" height="25"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="258" verticalHuggingPriority="251" text="15 h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2t-cg-3h2" userLabel="TimeLabel">
-                                                                        <rect key="frame" x="146.5" y="0.0" width="27" height="25"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="258" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2t-cg-3h2" userLabel="TimeLabel">
+                                                                        <rect key="frame" x="133.5" y="0.0" width="50" height="25"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="257" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXe-Ci-Dri" userLabel="Separator2">
-                                                                        <rect key="frame" x="178.5" y="0.0" width="8" height="25"/>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="257" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXe-Ci-Dri" userLabel="Separator2">
+                                                                        <rect key="frame" x="186" y="0.0" width="0.0" height="25"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="256" verticalHuggingPriority="251" text="i.redd.it" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaY-mA-NGf" userLabel="DomainLabel">
-                                                                        <rect key="frame" x="191.5" y="0.0" width="192.5" height="25"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="256" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaY-mA-NGf" userLabel="DomainLabel">
+                                                                        <rect key="frame" x="188.5" y="0.0" width="195.5" height="25"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -77,8 +77,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eb0-Vd-iNS" userLabel="TitleView">
                                                         <rect key="frame" x="0.0" y="25" width="394" height="25"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bruh bruh bruh bruh bruh rbuhru bhrub hrubh bruh bruh bruh bruh bruh rbuhru bhrub hrubh " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDc-E0-aCe" userLabel="TitleLabel">
-                                                                <rect key="frame" x="5" y="4.5" width="384" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDc-E0-aCe" userLabel="TitleLabel">
+                                                                <rect key="frame" x="5" y="25" width="384" height="0.0"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="uxo-rs-9Ia"/>
                                                                 </constraints>
@@ -111,7 +111,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </stackView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fMh-kt-9Lm" userLabel="PostImageView">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fMh-kt-9Lm" userLabel="PostImageView">
                                                 <rect key="frame" x="0.0" y="55" width="394" height="230"/>
                                                 <color key="backgroundColor" systemColor="separatorColor"/>
                                                 <constraints>
@@ -139,7 +139,7 @@
                                                                 <state key="normal" image="arrowtriangle.up" catalog="system"/>
                                                                 <state key="selected" image="arrowtriangle.up.fill" catalog="system"/>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999.7k" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFy-72-1iZ" userLabel="RatingLabel">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFy-72-1iZ" userLabel="RatingLabel">
                                                                 <rect key="frame" x="35" y="0.0" width="48" height="35"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <nil key="textColor"/>
@@ -169,7 +169,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="tintColor" systemColor="systemOrangeColor"/>
-                                                        <state key="normal" title="217" image="message" catalog="system">
+                                                        <state key="normal" image="message" catalog="system">
                                                             <color key="titleColor" systemColor="labelColor"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="medium"/>
                                                         </state>
@@ -200,6 +200,10 @@
                                                                 <state key="normal" image="bookmark" catalog="system">
                                                                     <color key="titleColor" systemColor="labelColor"/>
                                                                 </state>
+                                                                <state key="selected" image="bookmark.fill" catalog="system"/>
+                                                                <connections>
+                                                                    <action selector="saveButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sev-1T-Jjy"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -254,6 +258,18 @@
                             <constraint firstItem="XwP-GQ-raj" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="mlW-IC-c5X"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="authorLabel" destination="dWA-ZC-Xca" id="6rd-xh-SMH"/>
+                        <outlet property="commentsButton" destination="Ron-Sk-1cX" id="ZBD-iN-bZp"/>
+                        <outlet property="domainLabel" destination="HaY-mA-NGf" id="DX6-BK-8nu"/>
+                        <outlet property="imageView" destination="fMh-kt-9Lm" id="TSR-te-ECj"/>
+                        <outlet property="ratingLabel" destination="VFy-72-1iZ" id="Xu9-Hr-ShC"/>
+                        <outlet property="saveButton" destination="P0s-H2-dXI" id="REK-6c-d3S"/>
+                        <outlet property="separator1" destination="uzQ-vT-gfD" id="FUF-Cv-DXs"/>
+                        <outlet property="separator2" destination="aXe-Ci-Dri" id="AOJ-L8-I9J"/>
+                        <outlet property="timeLabel" destination="A2t-cg-3h2" id="fG0-5f-aZV"/>
+                        <outlet property="titleLabel" destination="SDc-E0-aCe" id="ZiH-QM-JCO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -266,6 +282,7 @@
         <image name="arrowtriangle.up" catalog="system" width="128" height="124"/>
         <image name="arrowtriangle.up.fill" catalog="system" width="128" height="124"/>
         <image name="bookmark" catalog="system" width="112" height="128"/>
+        <image name="bookmark.fill" catalog="system" width="112" height="128"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="paperplane" catalog="system" width="128" height="118"/>
         <systemColor name="labelColor">

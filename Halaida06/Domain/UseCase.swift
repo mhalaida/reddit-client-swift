@@ -9,13 +9,13 @@ import Foundation
 
 class UseCase {
     
-    static func getTop10RedditPosts(subreddit: String) {
+    static func getTop10RedditPosts(subreddit: String, completionUseCase: @escaping (RedditResponse) -> Void) {
         
         RedditRepository.getTop10Posts(subreddit: subreddit, completion: { (success) -> Void in
             if success {
                 if let result = RedditRepository.decode(respData: PersistenceManager.shared.cachedResp) {
                     let processedResult = processRedditRespRaw(rawResJSON: result);
-                    showRedditResp(resJSON: processedResult);
+                    completionUseCase(processedResult);
                 }
             } else {
                 print("Bruh error");
