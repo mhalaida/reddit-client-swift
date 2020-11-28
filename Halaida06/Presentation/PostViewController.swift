@@ -8,6 +8,8 @@
 import UIKit
 import SDWebImage
 
+let resSavedToDb = Notification.Name("RedditRequest")
+
 class PostViewController: UIViewController {
     
     @IBOutlet weak var authorLabel: UILabel!
@@ -31,19 +33,33 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UseCase.getTop10RedditPosts(subreddit: "dankmemes", completionUseCase: {(data) -> Void in
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(triggerPostUpdate), name: resSavedToDb, object: nil)
+        
+        UseCase.requestPosts(subreddit: "dankmemes", listingType: "top", limit: 1);
+        
+    }
+    
+    @objc
+    func triggerPostUpdate() {
+        updatePost();
+    }
+    
+    func updatePost() {
+        let finalResp = UseCase.fetchAllPosts();
+        for post in finalResp {
             DispatchQueue.main.async {
                 self.separator1.isHidden = false;
                 self.separator2.isHidden = false;
-                self.authorLabel.text = "u/\(data.data[0].author ?? "")"
-                self.timeLabel.text = self.formatDate(rawDate: data.data[0].created_utc ?? 0)
-                self.domainLabel.text = data.data[0].domain;
-                self.titleLabel.text = data.data[0].title;
-                self.ratingLabel.text = self.formatRating(rawRating: ((data.data[0].ups ?? 0) - (data.data[0].downs ?? 0)));
-                self.commentsButton.setTitle(self.formatRating(rawRating: data.data[0].num_comments ?? 0), for: .normal)
-                self.imageView.sd_setImage(with: URL(string: data.data[0].url!), placeholderImage: UIImage())
+                self.authorLabel.text = "u/\(post.author ?? "")"
+                self.timeLabel.text = self.formatDate(rawDate: post.created_utc ?? 0)
+                self.domainLabel.text = post.domain;
+                self.titleLabel.text = post.title;
+                self.ratingLabel.text = self.formatRating(rawRating: ((post.ups ?? 0) - (post.downs ?? 0)));
+                self.commentsButton.setTitle(self.formatRating(rawRating: post.num_comments ?? 0), for: .normal)
+                self.imageView.sd_setImage(with: URL(string: post.url!), placeholderImage: UIImage())
             }
-        })
+        }
     }
     
     func formatRating(rawRating: Int) -> String {

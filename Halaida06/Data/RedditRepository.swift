@@ -9,22 +9,15 @@ import Foundation
 
 class RedditRepository {
     
-    static func getData() -> RedditResponseRaw {
+    static func requestPosts(subreddit: String, listingType: String, limit: Int) {
+        HTTPService.makeRequest(source: HTTPSource.Reddit(subreddit: subreddit, listingType: listingType, limit: limit, after: nil));
+    }
+    
+    static func fetchAllPosts() -> RedditResponseRaw {
         guard let result = decode(respData: PersistenceManager.shared.cachedResp) else {
             return RedditResponseRaw(data: RedditResponseRaw.DataStruct(children: []))
         }
         return result;
-    }
-    
-    static func getTop10Posts(subreddit: String, completion: @escaping (Bool) -> Void) {
-        // ... sending the request, waiting till the response is written to the DB, after which completion handler:
-        HTTPService.makeRequest(source: HTTPSource.Reddit(subreddit: subreddit, listingType: "top", limit: 10, after: nil), completion: { (success) -> Void in
-            if success {
-                completion(true);
-            } else {
-                print("L'Error")
-            }
-        })
     }
     
     static func decode(respData: Data) -> RedditResponseRaw? {

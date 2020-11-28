@@ -38,28 +38,19 @@ class HTTPService {
     };
     
     // generate URL request, send 1)request & 2) completion to HTTPRequester
-    static func makeRequest(source: HTTPSource, completion: @escaping (Bool) -> Void) {
+    static func makeRequest(source: HTTPSource) {
         HTTPRequester.requestGET(urlStr: generateURL(source: source), completionHandler: { data in
             if let data = data {
-                saveResponse(respData: data, saveCompletion: { (success) -> Void in
-                    if (success) {
-                        completion(true);
-                    } else {
-                        print("L'Error")
-                    }
-                })
+                saveResponse(respData: data)
             }
         })
     }
         
     // save the Data object to the DB
-    static func saveResponse(respData: Data, saveCompletion: (Bool) -> Void) {
+    static func saveResponse(respData: Data) {
         PersistenceManager.shared.cachedResp = respData;
-        if PersistenceManager.shared.cachedResp == respData {
-            saveCompletion(true);
-        } else {
-            saveCompletion(false);
-        }
+        NotificationCenter.default.post(Notification(name: resSavedToDb))
+        // MARK: - TRIGGER NOTIFICATION OBSERVER HERE
     }
 
 }
