@@ -10,35 +10,40 @@ import UIKit
 class PostListViewController: UITableViewController {
 
     // MARK: - Data
-//    private var posts: RedditResponse? = nil;
+    private var posts = [RedditPost]();
+    private var showSaved = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        posts = RedditResponse(data: [])
-//        UseCase.getTop10RedditPosts(subreddit: "pics", completionUseCase: {(data) -> Void in
-//            for post in data.data {
-//                DispatchQueue.main.sync {
-//                    self.posts?.data.append(RedditResponse.RedditPost(
-//                                                author: post.author,
-//                                                domain: post.domain,
-//                                                created_utc: post.created_utc,
-//                                                title: post.title,
-//                                                url: post.url,
-//                                                ups: post.ups,
-//                                                downs: post.downs,
-//                                                num_comments: post.num_comments,
-//                                                isSaved: false))
-//
-//                }
-//
-//            }
-//        });
+        NotificationCenter.default.addObserver(self, selector: #selector(triggerPostListUpdate), name: resSavedToDb, object: nil);
+        UseCase.requestPosts(subreddit: "dankmemes", listingType: "top", limit: 1);
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationItem.title = "r/dankmemes"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "archivebox"), style: .plain, target: self, action: #selector(toggleFilter))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor .systemOrange;
+        
+    }
+    
+    @objc
+    func toggleFilter() {
+        self.showSaved = !self.showSaved;
+        if self.showSaved {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "archivebox.fill")
+        } else {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "archivebox")
+        }
+    }
+    
+    @objc
+    func triggerPostListUpdate() {
+        updatePostList();
+    }
+    
+    func updatePostList() {
+        posts = UseCase.fetchAllPosts();
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: - Table view data source
@@ -48,18 +53,16 @@ class PostListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.posts.count;
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.reuseIdentifier, for: indexPath) as! PostTableViewCell
 
         // Configure the cell...
-
+        cell.configure(for: self.posts[indexPath.row])
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

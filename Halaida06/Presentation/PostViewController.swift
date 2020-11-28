@@ -34,7 +34,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(triggerPostUpdate), name: resSavedToDb, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(triggerPostUpdate), name: resSavedToDb, object: nil);
         
         UseCase.requestPosts(subreddit: "dankmemes", listingType: "top", limit: 1);
         
