@@ -12,6 +12,9 @@ class PostTableViewCell: UITableViewCell {
 
     // MARK: - ReuseIdentifier
     static let reuseIdentifier = "postCell"
+
+    // MARK: – ID
+    var id: String = "";
     
     // MARK: - IBOutlets
     @IBOutlet weak var authorLabel: UILabel!
@@ -33,9 +36,14 @@ class PostTableViewCell: UITableViewCell {
     @IBAction func saveButtonAction(_ sender: Any) {
         if (self.saveButton.isSelected) {
             self.saveButton.isSelected = false
+            UseCase.deleteById(id: self.id);
         } else {
             self.saveButton.isSelected = true
+            UseCase.saveById(id: self.id);
         }
+        NotificationCenter.default.post(Notification(name: postSavedByUser))
+        //the below notification is to ensure the post is still displayed as saved when scrolled
+        NotificationCenter.default.post(Notification(name: resSavedToDb))
     }
     
     @IBAction func upvoteButtonAction(_ sender: Any) {
@@ -61,7 +69,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @IBAction func commentsButtonAction(_ sender: Any) {
-        print("Hello!")
+        print(PersistenceManager.shared.savedData);
     }
     
     // MARK: - Lifecycle
@@ -73,10 +81,12 @@ class PostTableViewCell: UITableViewCell {
         self.postImageView.image = nil;
         self.ratingLabel.text = nil;
         self.commentsButton.setTitle(nil, for: .normal);
+        self.saveButton.isSelected = false;
     }
     
     // MARK: - Configuration
     func configure(for post: RedditPost) {
+        self.id = post.id ?? "";
         self.separator1.isHidden = false;
         self.separator2.isHidden = false;
         self.authorLabel.text = "u/\(post.author ?? "")"
@@ -84,8 +94,13 @@ class PostTableViewCell: UITableViewCell {
         self.domainLabel.text = post.domain;
         self.titleLabel.text = post.title;
         self.ratingLabel.text = self.formatRating(rawRating: ((post.ups ?? 0) - (post.downs ?? 0)));
-        self.commentsButton.setTitle(self.formatRating(rawRating: post.num_comments ?? 0), for: .normal)
-        self.postImageView.sd_setImage(with: URL(string: post.url!), placeholderImage: UIImage())
+        self.commentsButton.setTitle(self.formatRating(rawRating: post.num_comments ?? 0), for: .normal);
+        self.postImageView.sd_setImage(with: URL(string: post.url!), placeholderImage: UIImage());
+        if post.isSaved {
+            self.saveButton.isSelected = true
+        } else {
+            self.saveButton.isSelected = false
+        }
     }
     
     func formatRating(rawRating: Int) -> String {

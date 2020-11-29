@@ -13,11 +13,41 @@ class RedditRepository {
         HTTPService.makeRequest(source: HTTPSource.Reddit(subreddit: subreddit, listingType: listingType, limit: limit, after: nil));
     }
     
-    static func fetchAllPosts() -> RedditResponseRaw {
-        guard let result = decode(respData: PersistenceManager.shared.cachedResp) else {
-            return RedditResponseRaw(data: RedditResponseRaw.DataStruct(children: []))
+    static func fetchAllPosts() -> [RedditPost] {
+        var savedIds = [String]();
+        for savedPost in PersistenceManager.shared.savedData {
+            savedIds.append(savedPost.id ?? "")
         }
-        return result;
+        for (index, freshPost) in PersistenceManager.shared.freshData.enumerated() {
+            if savedIds.contains(freshPost.id ?? "") {
+                PersistenceManager.shared.freshData[index].isSaved = true;
+            }
+        }
+        return PersistenceManager.shared.freshData;
+    }
+    
+//    static func fetchAllSavedPosts() -> [RedditPost] {
+//        return Pers
+//    }
+    
+    static func saveById(id: String) {
+        if let saveIndex = PersistenceManager.shared.freshData.firstIndex(where: {$0.id == id}) {
+            PersistenceManager.shared.freshData[saveIndex].isSaved = true;
+            PersistenceManager.shared.$savedData.mutate {$0.append(PersistenceManager.shared.freshData[saveIndex])};
+        } else {
+            print(">>Could not find the post to save;")
+        }
+    }
+    
+    static func deleteById(id: String) {
+        if let freshDeleteIndex = PersistenceManager.shared.freshData.firstIndex(where: {$0.id == id}) {
+            PersistenceManager.shared.freshData[freshDeleteIndex].isSaved = false;
+        }
+        if let deleteIndex = PersistenceManager.shared.savedData.firstIndex(where: {$0.id == id}) {
+            PersistenceManager.shared.$savedData.mutate {$0.remove(at: deleteIndex)};
+        } else {
+            print(">>Could not find the post to delete;")
+        }
     }
     
     static func decode(respData: Data) -> RedditResponseRaw? {
@@ -31,6 +61,58 @@ class RedditRepository {
         }
     }
     
+    static func processRedditRespRaw(rawResJSON: RedditResponseRaw) -> [RedditPost] {
+        var resResp = [RedditPost]();
+        
+        for rawPostItem in rawResJSON.data.children {
+            var newPost = RedditPost(author: nil, domain: nil, created_utc: nil, title: nil, url: nil, ups: nil, downs: nil, num_comments: nil, isSaved: false);
+            let mirror = Mirror(reflecting: rawPostItem.data);
+            for rawProp in mirror.children {
+                switch rawProp.label {
+                case "name":
+                    newPost.id = rawProp.value as? String ?? ""
+                case "author":
+                    newPost.author = rawProp.value as? String ?? ""
+                case "domain":
+                    newPost.domain = rawProp.value as? String ?? ""
+                case "created_utc":
+                    newPost.created_utc = rawProp.value as? Int ?? 0
+                case "title":
+                    newPost.title = rawProp.value as? String ?? ""
+                case "url":
+                    newPost.url = rawProp.value as? String ?? ""
+                case "ups":
+                    newPost.ups = rawProp.value as? Int ?? 0
+                case "downs":
+                    newPost.downs = rawProp.value as? Int ?? 0
+                case "num_comments":
+                    newPost.num_comments = rawProp.value as? Int ?? 0
+                default:
+                    print("Unknown property in RedditResponseRaw")
+                }
+            }
+            resResp.append(newPost);
+        }
+        return resResp;
+    }
+    
+}
+
+struct LocalRedditPost: Codable {
+    var posts: [RedditPost]
+}
+
+struct RedditPost: Codable {
+    var id: String?
+    var author: String?
+    var domain: String?
+    var created_utc: Int?
+    var title: String?
+    var url: String?
+    var ups: Int?
+    var downs: Int?
+    var num_comments: Int?
+    var isSaved: Bool
 }
 
 struct RedditResponseRaw: Decodable {
@@ -40,6 +122,7 @@ struct RedditResponseRaw: Decodable {
         struct ItemStruct: Decodable {
             var data: ItemDataStruct
             struct ItemDataStruct: Decodable {
+                var name: String // id
                 var author: String
                 var domain: String
                 var created_utc: Int

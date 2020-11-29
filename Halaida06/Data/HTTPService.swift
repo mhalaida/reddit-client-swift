@@ -48,7 +48,7 @@ class HTTPService {
         
     // save the Data object to the DB
     static func saveResponse(respData: Data) {
-        PersistenceManager.shared.cachedResp = respData;
+        PersistenceManager.shared.freshData = RedditRepository.processRedditRespRaw(rawResJSON: RedditRepository.decode(respData: respData) ?? RedditResponseRaw(data: RedditResponseRaw.DataStruct(children: [])));
         NotificationCenter.default.post(Notification(name: resSavedToDb))
         // MARK: - TRIGGER NOTIFICATION OBSERVER HERE
     }

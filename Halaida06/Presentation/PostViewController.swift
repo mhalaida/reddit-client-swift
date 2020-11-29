@@ -8,8 +8,6 @@
 import UIKit
 import SDWebImage
 
-let resSavedToDb = Notification.Name("RedditRequest")
-
 class PostViewController: UIViewController {
     
     @IBOutlet weak var authorLabel: UILabel!

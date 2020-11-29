@@ -7,6 +7,8 @@
 
 import UIKit
 
+let resSavedToDb = Notification.Name("RedditRequest")
+
 class PostListViewController: UITableViewController {
 
     // MARK: - Data
@@ -16,9 +18,9 @@ class PostListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(triggerPostListUpdate), name: resSavedToDb, object: nil);
-        UseCase.requestPosts(subreddit: "dankmemes", listingType: "top", limit: 1);
+        UseCase.requestPosts(subreddit: "pics", listingType: "top", limit: 3);
         
-        navigationItem.title = "r/dankmemes"
+        navigationItem.title = "r/pics"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "archivebox"), style: .plain, target: self, action: #selector(toggleFilter))
         navigationItem.rightBarButtonItem?.tintColor = UIColor .systemOrange;
         
