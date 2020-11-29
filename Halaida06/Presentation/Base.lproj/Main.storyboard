@@ -8,16 +8,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Post View Controller-->
+        <!--Post Details View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PostViewController" customModule="Bruhddit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PostDetailsViewController" customModule="Bruhddit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XwP-GQ-raj" userLabel="PostView">
-                                <rect key="frame" x="5" y="285.5" width="404" height="335"/>
+                                <rect key="frame" x="5" y="307.5" width="404" height="335"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LTg-qg-use" userLabel="PostStackView">
                                         <rect key="frame" x="5" y="5" width="394" height="325"/>
@@ -111,7 +111,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </stackView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fMh-kt-9Lm" userLabel="PostImageView">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fMh-kt-9Lm" userLabel="PostImageView">
                                                 <rect key="frame" x="0.0" y="55" width="394" height="230"/>
                                                 <color key="backgroundColor" systemColor="separatorColor"/>
                                                 <constraints>
@@ -138,6 +138,9 @@
                                                                 <color key="tintColor" systemColor="systemOrangeColor"/>
                                                                 <state key="normal" image="arrowtriangle.up" catalog="system"/>
                                                                 <state key="selected" image="arrowtriangle.up.fill" catalog="system"/>
+                                                                <connections>
+                                                                    <action selector="upvoteButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0hE-aK-24P"/>
+                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFy-72-1iZ" userLabel="RatingLabel">
                                                                 <rect key="frame" x="35" y="0.0" width="48" height="35"/>
@@ -154,6 +157,9 @@
                                                                 <color key="tintColor" systemColor="systemOrangeColor"/>
                                                                 <state key="normal" image="arrowtriangle.down" catalog="system"/>
                                                                 <state key="selected" image="arrowtriangle.down.fill" catalog="system"/>
+                                                                <connections>
+                                                                    <action selector="downvoteButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cR3-v9-vcz"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -173,6 +179,9 @@
                                                             <color key="titleColor" systemColor="labelColor"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="medium"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="commentsButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fdb-bK-guB"/>
+                                                        </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRU-wj-VHU" userLabel="ShareSaveStackView">
                                                         <rect key="frame" x="284" y="0.0" width="110" height="35"/>
@@ -258,17 +267,20 @@
                             <constraint firstItem="XwP-GQ-raj" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="mlW-IC-c5X"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="w4W-uJ-Vk3"/>
                     <connections>
                         <outlet property="authorLabel" destination="dWA-ZC-Xca" id="6rd-xh-SMH"/>
                         <outlet property="commentsButton" destination="Ron-Sk-1cX" id="ZBD-iN-bZp"/>
                         <outlet property="domainLabel" destination="HaY-mA-NGf" id="DX6-BK-8nu"/>
-                        <outlet property="imageView" destination="fMh-kt-9Lm" id="TSR-te-ECj"/>
+                        <outlet property="downvoteButton" destination="TUb-W2-BLz" id="T83-k7-wW4"/>
+                        <outlet property="postImageView" destination="fMh-kt-9Lm" id="jok-zn-QNa"/>
                         <outlet property="ratingLabel" destination="VFy-72-1iZ" id="Xu9-Hr-ShC"/>
                         <outlet property="saveButton" destination="P0s-H2-dXI" id="REK-6c-d3S"/>
                         <outlet property="separator1" destination="uzQ-vT-gfD" id="FUF-Cv-DXs"/>
                         <outlet property="separator2" destination="aXe-Ci-Dri" id="AOJ-L8-I9J"/>
                         <outlet property="timeLabel" destination="A2t-cg-3h2" id="fG0-5f-aZV"/>
                         <outlet property="titleLabel" destination="SDc-E0-aCe" id="ZiH-QM-JCO"/>
+                        <outlet property="upvoteButton" destination="j6I-Hl-Y4J" id="yaO-jo-aew"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -383,7 +395,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </stackView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vEx-JE-fzd" userLabel="PostImageView">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vEx-JE-fzd" userLabel="PostImageView">
                                                     <rect key="frame" x="0.0" y="55" width="414" height="230"/>
                                                     <color key="backgroundColor" systemColor="separatorColor"/>
                                                     <constraints>
@@ -452,7 +464,7 @@
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="medium"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="commentsButtonAction:" destination="oap-7M-ccf" eventType="touchUpInside" id="CeW-xJ-1ky"/>
+                                                                <action selector="commentsButtonAction:" destination="oap-7M-ccf" eventType="touchUpInside" id="2OM-R2-8cc"/>
                                                             </connections>
                                                         </button>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fU2-tE-u4d" userLabel="ShareSaveStackView">
@@ -469,6 +481,9 @@
                                                                     <state key="normal" image="paperplane" catalog="system">
                                                                         <color key="titleColor" systemColor="labelColor"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="shareButtonAction:" destination="oap-7M-ccf" eventType="touchUpInside" id="qoy-wV-bvT"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZj-T8-O8B" userLabel="SaveButton">
                                                                     <rect key="frame" x="55" y="0.0" width="55" height="35"/>
@@ -503,15 +518,11 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemFillColor"/>
                                             <constraints>
-                                                <constraint firstItem="vEx-JE-fzd" firstAttribute="leading" secondItem="w0T-sP-rwT" secondAttribute="leading" id="4As-4X-dp3"/>
-                                                <constraint firstItem="vEx-JE-fzd" firstAttribute="top" secondItem="Osz-Vo-dp6" secondAttribute="bottom" constant="5" id="6wn-rl-Dbv"/>
-                                                <constraint firstItem="lXG-8l-pp4" firstAttribute="top" secondItem="vEx-JE-fzd" secondAttribute="bottom" constant="5" id="W6R-6l-ke0"/>
                                                 <constraint firstAttribute="bottom" secondItem="lXG-8l-pp4" secondAttribute="bottom" id="YWf-Vx-Evd"/>
                                                 <constraint firstAttribute="trailing" secondItem="Osz-Vo-dp6" secondAttribute="trailing" id="aRK-iN-Heo"/>
                                                 <constraint firstItem="Osz-Vo-dp6" firstAttribute="leading" secondItem="w0T-sP-rwT" secondAttribute="leading" id="cOe-qh-ZXL"/>
                                                 <constraint firstItem="lXG-8l-pp4" firstAttribute="leading" secondItem="w0T-sP-rwT" secondAttribute="leading" id="e97-QT-J9T"/>
                                                 <constraint firstItem="Osz-Vo-dp6" firstAttribute="top" secondItem="w0T-sP-rwT" secondAttribute="top" id="i9F-OV-XpF"/>
-                                                <constraint firstAttribute="trailing" secondItem="vEx-JE-fzd" secondAttribute="trailing" id="p5Z-rx-pR2"/>
                                                 <constraint firstAttribute="trailing" secondItem="lXG-8l-pp4" secondAttribute="trailing" id="y0g-hb-6TN"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
@@ -533,8 +544,7 @@
                                     <outlet property="commentsButton" destination="TMg-cr-pBD" id="ojE-iu-WIW"/>
                                     <outlet property="domainLabel" destination="S0E-Zb-rUY" id="JP3-Bv-4ut"/>
                                     <outlet property="downvoteButton" destination="P0s-PC-tW1" id="bsR-Tx-8U2"/>
-                                    <outlet property="imageView" destination="vEx-JE-fzd" id="CA4-kw-wyk"/>
-                                    <outlet property="postImageView" destination="vEx-JE-fzd" id="yzs-pn-21p"/>
+                                    <outlet property="postImageView" destination="vEx-JE-fzd" id="Mr5-iT-UU6"/>
                                     <outlet property="ratingLabel" destination="LHK-Ty-h0O" id="Za3-hS-Zfn"/>
                                     <outlet property="saveButton" destination="kZj-T8-O8B" id="qbl-mv-vXh"/>
                                     <outlet property="separator1" destination="9h5-OV-vFQ" id="pM2-Ld-oWN"/>
@@ -552,6 +562,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="8ax-ye-QEh"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="toPostDetails" id="ksP-pH-qRH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KOZ-HX-SBn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

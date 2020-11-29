@@ -12,7 +12,7 @@
 		5983091325725C3D00C938B6 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5983091225725C3D00C938B6 /* PostTableViewCell.swift */; };
 		59D4BD35254EFB4300B1B3AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D4BD34254EFB4300B1B3AB /* AppDelegate.swift */; };
 		59D4BD37254EFB4300B1B3AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D4BD36254EFB4300B1B3AB /* SceneDelegate.swift */; };
-		59D4BD39254EFB4300B1B3AB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D4BD38254EFB4300B1B3AB /* PostViewController.swift */; };
+		59D4BD39254EFB4300B1B3AB /* PostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D4BD38254EFB4300B1B3AB /* PostDetailsViewController.swift */; };
 		59D4BD3C254EFB4300B1B3AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59D4BD3A254EFB4300B1B3AB /* Main.storyboard */; };
 		59D4BD3E254EFB4400B1B3AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59D4BD3D254EFB4400B1B3AB /* Assets.xcassets */; };
 		59D4BD41254EFB4400B1B3AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59D4BD3F254EFB4400B1B3AB /* LaunchScreen.storyboard */; };
@@ -31,7 +31,7 @@
 		59D4BD31254EFB4300B1B3AB /* Bruhddit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bruhddit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59D4BD34254EFB4300B1B3AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59D4BD36254EFB4300B1B3AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		59D4BD38254EFB4300B1B3AB /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		59D4BD38254EFB4300B1B3AB /* PostDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailsViewController.swift; sourceTree = "<group>"; };
 		59D4BD3B254EFB4300B1B3AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		59D4BD3D254EFB4400B1B3AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59D4BD40254EFB4400B1B3AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -95,10 +95,10 @@
 		59D4BD4F254EFD5500B1B3AB /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				59D4BD53254EFDDA00B1B3AB /* RedditRepository.swift */,
 				59D4BD57254EFE4200B1B3AB /* HTTPRequester.swift */,
-				59D4BD5A254EFE6A00B1B3AB /* PersistenceManager.swift */,
 				59D4BD5D254EFEF500B1B3AB /* HTTPService.swift */,
+				59D4BD5A254EFE6A00B1B3AB /* PersistenceManager.swift */,
+				59D4BD53254EFDDA00B1B3AB /* RedditRepository.swift */,
 				5975236E257292DC002F85D9 /* ThreadSafeWrapper.swift */,
 			);
 			path = Data;
@@ -115,12 +115,12 @@
 		59D4BD51254EFD6600B1B3AB /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				59D4BD36254EFB4300B1B3AB /* SceneDelegate.swift */,
-				59D4BD38254EFB4300B1B3AB /* PostViewController.swift */,
-				59D4BD3A254EFB4300B1B3AB /* Main.storyboard */,
 				59D4BD3F254EFB4400B1B3AB /* LaunchScreen.storyboard */,
+				59D4BD3A254EFB4300B1B3AB /* Main.storyboard */,
+				59D4BD38254EFB4300B1B3AB /* PostDetailsViewController.swift */,
 				5983090F25725B3800C938B6 /* PostListViewController.swift */,
 				5983091225725C3D00C938B6 /* PostTableViewCell.swift */,
+				59D4BD36254EFB4300B1B3AB /* SceneDelegate.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -205,7 +205,7 @@
 				5975236F257292DC002F85D9 /* ThreadSafeWrapper.swift in Sources */,
 				59D4BD63254F003B00B1B3AB /* UseCase.swift in Sources */,
 				59D4BD5E254EFEF500B1B3AB /* HTTPService.swift in Sources */,
-				59D4BD39254EFB4300B1B3AB /* PostViewController.swift in Sources */,
+				59D4BD39254EFB4300B1B3AB /* PostDetailsViewController.swift in Sources */,
 				59D4BD35254EFB4300B1B3AB /* AppDelegate.swift in Sources */,
 				59D4BD37254EFB4300B1B3AB /* SceneDelegate.swift in Sources */,
 				59D4BD54254EFDDA00B1B3AB /* RedditRepository.swift in Sources */,

@@ -1,31 +1,21 @@
 //
-//  PostTableViewCell.swift
+//  ViewController.swift
 //  Halaida06
 //
-//  Created by Mykhailo Halaida on 28.11.2020.
+//  Created by Mykhailo Halaida on 01.11.2020.
 //
 
 import UIKit
 import SDWebImage
 
-protocol PostInfoDelegate {
-    func passInfo(id: String);
-    func sharePost(permalink: String)
-}
-
-class PostTableViewCell: UITableViewCell {
-
-    // MARK: - ReuseIdentifier
-    static let reuseIdentifier = "postCell"
-
-    // MARK: - Delegate
-    var postInfoDelegate: PostInfoDelegate!
+class PostDetailsViewController: UIViewController {
     
-    // MARK: - ID
+    // MARK: – ID
     var id: String = "";
-    var permalink: String = "";
     
-    // MARK: - IBOutlets
+    var auxPost: RedditPost? = nil;
+    
+    // MARK: – IBOutlets
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var separator1: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -39,9 +29,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var downvoteButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
     
+    @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonAction(_ sender: Any) {
         if (self.saveButton.isSelected) {
             self.saveButton.isSelected = false
@@ -54,7 +43,7 @@ class PostTableViewCell: UITableViewCell {
         //the below notification is to ensure the post is still displayed as saved when scrolled
         NotificationCenter.default.post(Notification(name: resSavedToDb))
     }
-    
+
     @IBAction func upvoteButtonAction(_ sender: Any) {
         if (self.downvoteButton.isSelected) {
             self.downvoteButton.isSelected = false
@@ -78,47 +67,40 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @IBAction func commentsButtonAction(_ sender: Any) {
-        postInfoDelegate.passInfo(id: self.id);
+        print(PersistenceManager.shared.savedData);
     }
     
-    @IBAction func shareButtonAction(_ sender: Any) {
-        postInfoDelegate.sharePost(permalink: self.permalink);
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        displayPostInfo(postOrigin: auxPost!);
     }
     
-    // MARK: - Lifecycle
-    override func prepareForReuse() {
-        self.authorLabel.text = nil;
-        self.timeLabel.text = nil;
-        self.domainLabel.text = nil;
-        self.titleLabel.text = nil;
-        self.postImageView.image = nil;
-        self.ratingLabel.text = nil;
-        self.commentsButton.setTitle(nil, for: .normal);
-        self.saveButton.isSelected = false;
+    func savePostInfo(postOrigin: RedditPost) {
+        self.auxPost = postOrigin;
     }
     
-    // MARK: - Configuration
-    func configure(for post: RedditPost) {
-        self.permalink = post.permalink ?? "https://reddit.com/";
-        self.id = post.id ?? "";
-        self.separator1.isHidden = false;
-        self.separator2.isHidden = false;
-        self.authorLabel.text = "u/\(post.author ?? "")"
-        self.timeLabel.text = self.formatDate(rawDate: post.created_utc ?? 0)
-        self.domainLabel.text = post.domain;
-        self.titleLabel.text = post.title;
-        self.ratingLabel.text = self.formatRating(rawRating: ((post.ups ?? 0) - (post.downs ?? 0)));
-        self.commentsButton.setTitle(self.formatRating(rawRating: post.num_comments ?? 0), for: .normal);
-        self.postImageView.sd_setImage(with: URL(string: post.url!), placeholderImage: UIImage());
-        if post.isSaved {
-            self.saveButton.isSelected = true
-        } else {
-            self.saveButton.isSelected = false
+    func displayPostInfo(postOrigin: RedditPost) {
+        DispatchQueue.main.async {
+            self.id = postOrigin.id ?? "";
+            self.separator1?.isHidden = false;
+            self.separator2?.isHidden = false;
+            self.authorLabel?.text = "u/\(postOrigin.author ?? "")"
+            self.timeLabel?.text = self.formatDate(rawDate: postOrigin.created_utc ?? 0)
+            self.domainLabel?.text = postOrigin.domain;
+            self.titleLabel?.text = postOrigin.title;
+            self.ratingLabel?.text = self.formatRating(rawRating: ((postOrigin.ups ?? 0) - (postOrigin.downs ?? 0)));
+            self.commentsButton?.setTitle(self.formatRating(rawRating: postOrigin.num_comments ?? 0), for: .normal)
+            self.postImageView?.sd_setImage(with: URL(string: postOrigin.url!), placeholderImage: UIImage())
+            if postOrigin.isSaved {
+                self.saveButton?.isSelected = true;
+            } else {
+                self.saveButton?.isSelected = false;
+            }
+            let saveGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleSaveDoubleTap));
+            saveGestureRecognizer.numberOfTapsRequired = 2;
+            self.postImageView.addGestureRecognizer(saveGestureRecognizer);
+            self.postImageView.isUserInteractionEnabled = true;
         }
-        let saveGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleSaveDoubleTap));
-        saveGestureRecognizer.numberOfTapsRequired = 2;
-        self.postImageView.addGestureRecognizer(saveGestureRecognizer);
-        self.postImageView.isUserInteractionEnabled = true;
     }
     
     @objc
@@ -164,5 +146,6 @@ class PostTableViewCell: UITableViewCell {
         }
         return timePassed;
     }
-
+    
 }
+

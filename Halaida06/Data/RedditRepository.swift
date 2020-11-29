@@ -13,7 +13,7 @@ class RedditRepository {
         HTTPService.makeRequest(source: HTTPSource.Reddit(subreddit: subreddit, listingType: listingType, limit: limit, after: nil));
     }
     
-    static func fetchAllPosts() -> [RedditPost] {
+    static func fetchAllPostsFresh() -> [RedditPost] {
         var savedIds = [String]();
         for savedPost in PersistenceManager.shared.savedData {
             savedIds.append(savedPost.id ?? "")
@@ -26,9 +26,9 @@ class RedditRepository {
         return PersistenceManager.shared.freshData;
     }
     
-//    static func fetchAllSavedPosts() -> [RedditPost] {
-//        return Pers
-//    }
+    static func fetchAllPostsSaved() -> [RedditPost] {
+        return PersistenceManager.shared.savedData;
+    }
     
     static func saveById(id: String) {
         if let saveIndex = PersistenceManager.shared.freshData.firstIndex(where: {$0.id == id}) {
@@ -69,6 +69,8 @@ class RedditRepository {
             let mirror = Mirror(reflecting: rawPostItem.data);
             for rawProp in mirror.children {
                 switch rawProp.label {
+                case "permalink":
+                    newPost.permalink = "https://www.reddit.com" + (rawProp.value as? String ?? "")
                 case "name":
                     newPost.id = rawProp.value as? String ?? ""
                 case "author":
@@ -113,6 +115,7 @@ struct RedditPost: Codable {
     var downs: Int?
     var num_comments: Int?
     var isSaved: Bool
+    var permalink: String?
 }
 
 struct RedditResponseRaw: Decodable {
@@ -131,6 +134,7 @@ struct RedditResponseRaw: Decodable {
                 var ups: Int
                 var downs: Int
                 var num_comments: Int
+                var permalink: String
             }
         }
     }

@@ -56,16 +56,12 @@ class PersistenceManager {
     func loadJSON() {
         do {
             let localData = try Data(contentsOf: self.getFileURL());
-            print(String(decoding: localData, as: UTF8.self))
             let jsonDecoder = JSONDecoder();
             let loadedData = try jsonDecoder.decode(LocalRedditPost.self, from: localData);
-            print(loadedData)
-            if loadedData != nil {
-                for localPost in loadedData.posts {
-                    self.savedData.append(localPost)
-                }
-                print(">>Data loaded from the filesystem succesfully;")
+            for localPost in loadedData.posts {
+                self.savedData.append(localPost)
             }
+            print(">>Data loaded from the filesystem succesfully;")
         } catch {
             print(">>Error loading the data from the filesystem;")
         }

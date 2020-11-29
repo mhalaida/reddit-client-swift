@@ -13,8 +13,12 @@ class UseCase {
         RedditRepository.requestPosts(subreddit: subreddit, listingType: listingType, limit: limit);
     };
     
-    static func fetchAllPosts() -> [RedditPost] {
-        return RedditRepository.fetchAllPosts();
+    static func fetchAllPostsFresh() -> [RedditPost] {
+        return RedditRepository.fetchAllPostsFresh();
+    }
+    
+    static func fetchAllPostsSaved() -> [RedditPost] {
+        return RedditRepository.fetchAllPostsSaved();
     }
     
     static func saveById(id: String) {
