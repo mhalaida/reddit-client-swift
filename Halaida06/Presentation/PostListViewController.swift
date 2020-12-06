@@ -10,11 +10,13 @@ import UIKit
 let resSavedToDb = Notification.Name("RedditRequest")
 private let toPostDetailsIdentifier = "toPostDetails"
 
-class PostListViewController: UITableViewController {
+class PostListViewController: UITableViewController, UISearchResultsUpdating {
     
     // MARK: - Data
     private var posts = [RedditPost]();
+    private var postsUnfiltered = [RedditPost]();
     private var showSaved = false;
+    private var postSearchController = UISearchController();
     private var postForSegue = RedditPost(id: nil, author: nil, domain: nil, created_utc: nil, title: nil, url: nil, ups: nil, downs: nil, num_comments: nil, isSaved: false, permalink: nil)
     
     override func viewDidLoad() {
@@ -43,8 +45,19 @@ class PostListViewController: UITableViewController {
     @objc
     func triggerPostListUpdate() {
         if self.showSaved {
+            postSearchController = ({
+                let postSC = UISearchController(searchResultsController: nil)
+                postSC.searchResultsUpdater = self
+                postSC.obscuresBackgroundDuringPresentation = false;
+                postSC.searchBar.sizeToFit()
+                tableView.tableHeaderView = postSC.searchBar
+                return postSC
+            })()
             updatePostListSaved();
         } else {
+            DispatchQueue.main.async {
+                self.tableView.tableHeaderView = nil;
+            }
             updatePostListFresh();
         }
     }
@@ -52,6 +65,7 @@ class PostListViewController: UITableViewController {
     //fill table with fresh posts
     func updatePostListFresh() {
         posts = UseCase.fetchAllPostsFresh();
+        postsUnfiltered = posts;
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -60,6 +74,18 @@ class PostListViewController: UITableViewController {
     //fill table with saved posts
     func updatePostListSaved() {
         posts = UseCase.fetchAllPostsSaved();
+        postsUnfiltered = posts;
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if (searchController.searchBar.text! != "") {
+            self.posts = self.postsUnfiltered.filter { $0.title!.lowercased().contains(searchController.searchBar.text!.lowercased()) }
+        } else {
+            self.posts = self.postsUnfiltered;
+        }
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -82,10 +108,6 @@ class PostListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.reuseIdentifier, for: indexPath) as! PostTableViewCell
         cell.postInfoDelegate = self;
         cell.configure(for: self.posts[indexPath.row]);
-//        let saveGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleSaveDoubleTap));
-//        saveGestureRecognizer.numberOfTapsRequired = 2;
-//        cell.postImageView.addGestureRecognizer(saveGestureRecognizer);
-//        cell.postImageView.isUserInteractionEnabled = true;
         return cell
     }
     
@@ -119,7 +141,12 @@ extension PostListViewController: PostInfoDelegate {
     func sharePost(permalink: String) {
         let postURL = [URL(string: permalink)!]
         let ac = UIActivityViewController(activityItems: postURL, applicationActivities: nil)
-        present(ac, animated: true)
+        //        present(ac, animated: true)
+        if self.postSearchController.isActive {
+            self.postSearchController.present(ac, animated: true, completion: nil)
+        } else {
+            self.present(ac, animated: true, completion: nil)
+        }
     }
     
     func passInfo(id: String) {
