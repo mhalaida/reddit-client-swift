@@ -10,7 +10,7 @@ import Foundation
 let postSavedByUser = Notification.Name("RedditPostSaved")
 
 // MARK: A singleton serving as the last cached response storage
-class PersistenceManager {
+class PersistenceManager: ObservableObject {
     
     static var shared = PersistenceManager();
     
@@ -21,10 +21,16 @@ class PersistenceManager {
     };
     
     @ThreadSafe var savedData: [RedditPost];
+    @Published var freshComments: [RedditComment];
     
     private init() {
         freshData = [RedditPost]();
         savedData = [RedditPost]();
+        freshComments = [
+            RedditComment(id: "1", author: "bruh1", created_utc: 12345, body: "bruh bruh bruh bruhb ruhbruhbruh rubh ", ups: 534, downs: 0),
+            RedditComment(id: "2", author: "bruh2", created_utc: 64572, body: "nartjevrjbryjerdyjkveryjkv", ups: 756, downs: 0),
+            RedditComment(id: "3", author: "bruh3", created_utc: 17357, body: "164134646 2361346 ", ups: 512, downs: 0),
+        ]
         NotificationCenter.default.addObserver(self, selector: #selector(triggerSaveJSON), name: postSavedByUser, object: nil);
     };
     

@@ -41,7 +41,7 @@ class PostDetailsViewController: UIViewController {
         }
         NotificationCenter.default.post(Notification(name: postSavedByUser))
         //the below notification is to ensure the post is still displayed as saved when scrolled
-        NotificationCenter.default.post(Notification(name: resSavedToDb))
+        NotificationCenter.default.post(Notification(name: freshPostsSaved))
     }
 
     @IBAction func upvoteButtonAction(_ sender: Any) {
@@ -114,7 +114,7 @@ class PostDetailsViewController: UIViewController {
         }
         NotificationCenter.default.post(Notification(name: postSavedByUser))
         //the below notification is to ensure the post is still displayed as saved when scrolled
-        NotificationCenter.default.post(Notification(name: resSavedToDb))
+        NotificationCenter.default.post(Notification(name: freshPostsSaved))
     }
     
     func formatRating(rawRating: Int) -> String {

@@ -14,8 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        PersistenceManager.shared.loadJSON();
-        print(PersistenceManager.shared.savedData);
+        UseCase.requestComments(subreddit: "pics", postId: "k347be");
+//        PersistenceManager.shared.loadJSON();
+//        print(PersistenceManager.shared.savedData);
         // Override point for customization after application launch.
         return true
     }

@@ -7,7 +7,8 @@
 
 import UIKit
 
-let resSavedToDb = Notification.Name("RedditRequest")
+let freshPostsSaved = Notification.Name("freshPostsSaved")
+let freshCommentsSaved = Notification.Name("freshCommentsSaved")
 private let toPostDetailsIdentifier = "toPostDetails"
 
 class PostListViewController: UITableViewController, UISearchResultsUpdating {
@@ -21,7 +22,7 @@ class PostListViewController: UITableViewController, UISearchResultsUpdating {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(triggerPostListUpdate), name: resSavedToDb, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(triggerPostListUpdate), name: freshPostsSaved, object: nil);
         UseCase.requestPosts(subreddit: "pics", listingType: "top", limit: 150);
         
         navigationItem.title = "r/pics"
@@ -111,15 +112,9 @@ class PostListViewController: UITableViewController, UISearchResultsUpdating {
         return cell
     }
     
-//    @objc
-//    func handleSaveDoubleTap() {
-//        print("SRAKA")
-//    }
-    
     //cell selection handler
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        self.performSegue(withIdentifier: toPostDetailsIdentifier, sender: self.posts[indexPath.row])
     }
 
     

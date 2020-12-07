@@ -13,6 +13,10 @@ class UseCase {
         RedditRepository.requestPosts(subreddit: subreddit, listingType: listingType, limit: limit);
     };
     
+    static func requestComments(subreddit: String, postId: String) {
+        RedditRepository.requestComments(subreddit: subreddit, postId: postId);
+    }
+    
     static func fetchAllPostsFresh() -> [RedditPost] {
         return RedditRepository.fetchAllPostsFresh();
     }

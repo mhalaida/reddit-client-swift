@@ -10,7 +10,11 @@ import Foundation
 class RedditRepository {
     
     static func requestPosts(subreddit: String, listingType: String, limit: Int) {
-        HTTPService.makeRequest(source: HTTPSource.Reddit(subreddit: subreddit, listingType: listingType, limit: limit, after: nil));
+        HTTPService.makePostRequest(source: RedditSource.Post(subreddit: subreddit, listingType: listingType, limit: limit, after: nil));
+    }
+    
+    static func requestComments(subreddit: String, postId: String) {
+        HTTPService.makeCommentRequest(source: RedditSource.Comment(subreddit: subreddit, postId: postId))
     }
     
     static func fetchAllPostsFresh() -> [RedditPost] {
@@ -50,10 +54,10 @@ class RedditRepository {
         }
     }
     
-    static func decode(respData: Data) -> RedditResponseRaw? {
+    static func decodePost(respData: Data) -> RedditPostRaw? {
         let jsonDecoder = JSONDecoder();
         do {
-            let parsedJSON = try jsonDecoder.decode(RedditResponseRaw.self, from: respData);
+            let parsedJSON = try jsonDecoder.decode(RedditPostRaw.self, from: respData);
             return parsedJSON;
         } catch {
             print(error);
@@ -61,9 +65,20 @@ class RedditRepository {
         }
     }
     
-    static func processRedditRespRaw(rawResJSON: RedditResponseRaw) -> [RedditPost] {
+    static func decodeComment(respData: Data) -> [RedditCommentRaw]? {
+        let jsonDecoder = JSONDecoder();
+        do {
+            var parsedJSON = try jsonDecoder.decode([RedditCommentRaw].self, from: respData);
+            parsedJSON.removeFirst();
+            return parsedJSON;
+        } catch {
+            print(error);
+            return nil;
+        }
+    }
+    
+    static func processRedditPostRaw(rawResJSON: RedditPostRaw) -> [RedditPost] {
         var resResp = [RedditPost]();
-        
         for rawPostItem in rawResJSON.data.children {
             var newPost = RedditPost(author: nil, domain: nil, created_utc: nil, title: nil, url: nil, ups: nil, downs: nil, num_comments: nil, isSaved: false);
             let mirror = Mirror(reflecting: rawPostItem.data);
@@ -90,10 +105,40 @@ class RedditRepository {
                 case "num_comments":
                     newPost.num_comments = rawProp.value as? Int ?? 0
                 default:
-                    print("Unknown property in RedditResponseRaw")
+                    print("Unknown property in RedditPostRaw")
                 }
             }
             resResp.append(newPost);
+        }
+        return resResp;
+    }
+    
+    static func processRedditCommentRaw(rawResJSON: [RedditCommentRaw]) -> [RedditComment] {
+        var resResp = [RedditComment]();
+        for rawCommentItem in rawResJSON[0].data.children {
+            var newComment = RedditComment();
+            let mirror = Mirror(reflecting: rawCommentItem.data);
+            for rawProp in mirror.children {
+                switch rawProp.label {
+                case "name":
+                    newComment.id = rawProp.value as? String ?? ""
+                case "author":
+                    newComment.author = rawProp.value as? String ?? ""
+                case "created_utc":
+                    newComment.created_utc = rawProp.value as? Int ?? 0
+                case "body":
+                    newComment.body = rawProp.value as? String ?? ""
+                case "ups":
+                    newComment.ups = rawProp.value as? Int ?? 0
+                case "downs":
+                    newComment.downs = rawProp.value as? Int ?? 0
+                case "permalink":
+                    newComment.permalink = "https://www.reddit.com" + (rawProp.value as? String ?? "")
+                default:
+                    print("Unknown property in RedditCommentRaw")
+                }
+            }
+            resResp.append(newComment);
         }
         return resResp;
     }
@@ -102,6 +147,16 @@ class RedditRepository {
 
 struct LocalRedditPost: Codable {
     var posts: [RedditPost]
+}
+
+struct RedditComment: Identifiable, Codable {
+    var id: String?
+    var author: String?
+    var created_utc: Int?
+    var body: String?
+    var ups: Int?
+    var downs: Int?
+    var permalink: String?
 }
 
 struct RedditPost: Codable {
@@ -118,7 +173,26 @@ struct RedditPost: Codable {
     var permalink: String?
 }
 
-struct RedditResponseRaw: Decodable {
+struct RedditCommentRaw: Codable {
+    var data: DataStruct
+    struct DataStruct: Codable {
+        var children: [ItemStruct]
+        struct ItemStruct: Codable {
+            var data: ItemDataStruct
+            struct ItemDataStruct: Codable {
+                var name: String //id
+                var author: String
+                var body: String?
+                var permalink: String
+                var ups: Int
+                var downs: Int
+                var created_utc: Int
+            }
+        }
+    }
+}
+
+struct RedditPostRaw: Decodable {
     var data: DataStruct
     struct DataStruct: Decodable {
         var children: [ItemStruct]
@@ -140,7 +214,8 @@ struct RedditResponseRaw: Decodable {
     }
 }
 
-enum HTTPSource {
-    case Reddit(subreddit: String, listingType: String, limit: Int?, after: String?)
+enum RedditSource {
+    case Post(subreddit: String, listingType: String, limit: Int?, after: String?)
+    case Comment(subreddit: String, postId: String)
     //other APIs can be handled here
 }
