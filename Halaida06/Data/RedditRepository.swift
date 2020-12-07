@@ -34,6 +34,10 @@ class RedditRepository {
         return PersistenceManager.shared.savedData;
     }
     
+    static func fetchCommentsFresh() -> [RedditComment] {
+        return PersistenceManager.shared.freshComments;
+    }
+    
     static func saveById(id: String) {
         if let saveIndex = PersistenceManager.shared.freshData.firstIndex(where: {$0.id == id}) {
             PersistenceManager.shared.freshData[saveIndex].isSaved = true;
@@ -65,12 +69,11 @@ class RedditRepository {
         }
     }
     
-    static func decodeComment(respData: Data) -> [RedditCommentRaw]? {
+    static func decodeComment(respData: Data) -> RedditCommentRaw? {
         let jsonDecoder = JSONDecoder();
         do {
-            var parsedJSON = try jsonDecoder.decode([RedditCommentRaw].self, from: respData);
-            parsedJSON.removeFirst();
-            return parsedJSON;
+            let parsedJSON = try jsonDecoder.decode([RedditCommentRaw].self, from: respData);
+            return parsedJSON[1];
         } catch {
             print(error);
             return nil;
@@ -113,9 +116,9 @@ class RedditRepository {
         return resResp;
     }
     
-    static func processRedditCommentRaw(rawResJSON: [RedditCommentRaw]) -> [RedditComment] {
+    static func processRedditCommentRaw(rawResJSON: RedditCommentRaw) -> [RedditComment] {
         var resResp = [RedditComment]();
-        for rawCommentItem in rawResJSON[0].data.children {
+        for rawCommentItem in rawResJSON.data.children {
             var newComment = RedditComment();
             let mirror = Mirror(reflecting: rawCommentItem.data);
             for rawProp in mirror.children {
@@ -173,20 +176,20 @@ struct RedditPost: Codable {
     var permalink: String?
 }
 
-struct RedditCommentRaw: Codable {
+struct RedditCommentRaw: Decodable {
     var data: DataStruct
-    struct DataStruct: Codable {
+    struct DataStruct: Decodable {
         var children: [ItemStruct]
-        struct ItemStruct: Codable {
+        struct ItemStruct: Decodable {
             var data: ItemDataStruct
-            struct ItemDataStruct: Codable {
-                var name: String //id
-                var author: String
+            struct ItemDataStruct: Decodable {
+                var name: String? //id
+                var author: String?
                 var body: String?
-                var permalink: String
-                var ups: Int
-                var downs: Int
-                var created_utc: Int
+                var permalink: String?
+                var ups: Int?
+                var downs: Int?
+                var created_utc: Int?
             }
         }
     }

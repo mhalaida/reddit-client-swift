@@ -25,6 +25,10 @@ class UseCase {
         return RedditRepository.fetchAllPostsSaved();
     }
     
+    static func fetchCommentsFresh() -> [RedditComment] {
+        return RedditRepository.fetchCommentsFresh();
+    }
+    
     static func saveById(id: String) {
         RedditRepository.saveById(id: id);
     }

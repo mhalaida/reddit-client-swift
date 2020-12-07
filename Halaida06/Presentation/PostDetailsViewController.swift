@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import SDWebImage
 
 class PostDetailsViewController: UIViewController {
@@ -15,20 +16,29 @@ class PostDetailsViewController: UIViewController {
     
     var auxPost: RedditPost? = nil;
     
+    let commentsView = UIHostingController(rootView: CommentListView(comments: [RedditComment]()))
+    
     // MARK: – IBOutlets
-    @IBOutlet weak var authorLabel: UILabel!
-    @IBOutlet weak var separator1: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var separator2: UILabel!
-    @IBOutlet weak var domainLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var authorLabel: UILabel!
+    @IBOutlet private weak var separator1: UILabel!
+    @IBOutlet private weak var timeLabel: UILabel!
+    @IBOutlet private weak var separator2: UILabel!
+    @IBOutlet private weak var domainLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
     
-    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet private weak var postImageView: UIImageView!
     
-    @IBOutlet weak var upvoteButton: UIButton!
-    @IBOutlet weak var ratingLabel: UILabel!
-    @IBOutlet weak var downvoteButton: UIButton!
-    @IBOutlet weak var commentsButton: UIButton!
+    @IBOutlet private weak var upvoteButton: UIButton!
+    @IBOutlet private weak var ratingLabel: UILabel!
+    @IBOutlet private weak var downvoteButton: UIButton!
+    @IBOutlet private weak var commentsButton: UIButton!
+    @IBOutlet private weak var shareButton: UIButton!
+    
+    @IBAction func shareButtonAction(_ sender: Any) {
+        let postURL = [URL(string: auxPost?.permalink ?? "https://www.reddit.com")!]
+        let ac = UIActivityViewController(activityItems: postURL, applicationActivities: nil)
+        self.present(ac, animated: true, completion: nil)
+    }
     
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonAction(_ sender: Any) {
@@ -43,7 +53,7 @@ class PostDetailsViewController: UIViewController {
         //the below notification is to ensure the post is still displayed as saved when scrolled
         NotificationCenter.default.post(Notification(name: freshPostsSaved))
     }
-
+    
     @IBAction func upvoteButtonAction(_ sender: Any) {
         if (self.downvoteButton.isSelected) {
             self.downvoteButton.isSelected = false
@@ -70,9 +80,33 @@ class PostDetailsViewController: UIViewController {
         print(PersistenceManager.shared.savedData);
     }
     
+    // MARK: – viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateComments), name: freshCommentsSaved, object: nil);
         displayPostInfo(postOrigin: auxPost!);
+        DispatchQueue.main.async {
+            self.addChild(self.commentsView)
+            self.view.addSubview(self.commentsView.view)
+            self.configureCommentsView()
+        }
+    }
+    
+    func configureCommentsView() {
+        DispatchQueue.main.async {
+            self.commentsView.view.translatesAutoresizingMaskIntoConstraints = false
+            self.commentsView.view.topAnchor.constraint(equalTo: self.view.subviews[0].bottomAnchor).isActive = true
+            self.commentsView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+            self.commentsView.view.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+            self.commentsView.view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        }
+    }
+    
+    @objc
+    func updateComments() {
+        DispatchQueue.main.async {
+            self.commentsView.rootView.comments = UseCase.fetchCommentsFresh();
+        }
     }
     
     func savePostInfo(postOrigin: RedditPost) {
@@ -100,6 +134,9 @@ class PostDetailsViewController: UIViewController {
             saveGestureRecognizer.numberOfTapsRequired = 2;
             self.postImageView.addGestureRecognizer(saveGestureRecognizer);
             self.postImageView.isUserInteractionEnabled = true;
+            UseCase.requestComments(subreddit: globalSubreddit, postId: String(self.id.dropFirst(3)));
+            print(self.id)
+            print(self.id.dropFirst(3))
         }
     }
     

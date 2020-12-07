@@ -26,21 +26,21 @@ class PostTableViewCell: UITableViewCell {
     var permalink: String = "";
     
     // MARK: - IBOutlets
-    @IBOutlet weak var authorLabel: UILabel!
-    @IBOutlet weak var separator1: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var separator2: UILabel!
-    @IBOutlet weak var domainLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var authorLabel: UILabel!
+    @IBOutlet private weak var separator1: UILabel!
+    @IBOutlet private weak var timeLabel: UILabel!
+    @IBOutlet private weak var separator2: UILabel!
+    @IBOutlet private weak var domainLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
     
-    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet private weak var postImageView: UIImageView!
     
-    @IBOutlet weak var upvoteButton: UIButton!
-    @IBOutlet weak var ratingLabel: UILabel!
-    @IBOutlet weak var downvoteButton: UIButton!
-    @IBOutlet weak var commentsButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet private weak var upvoteButton: UIButton!
+    @IBOutlet private weak var ratingLabel: UILabel!
+    @IBOutlet private weak var downvoteButton: UIButton!
+    @IBOutlet private weak var commentsButton: UIButton!
+    @IBOutlet private weak var shareButton: UIButton!
+    @IBOutlet private weak var saveButton: UIButton!
     
     @IBAction func saveButtonAction(_ sender: Any) {
         if (self.saveButton.isSelected) {

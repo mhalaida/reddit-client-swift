@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XwP-GQ-raj" userLabel="PostView">
-                                <rect key="frame" x="5" y="307.5" width="404" height="335"/>
+                                <rect key="frame" x="5" y="93" width="404" height="335"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LTg-qg-use" userLabel="PostStackView">
                                         <rect key="frame" x="5" y="5" width="394" height="325"/>
@@ -197,6 +197,9 @@
                                                                 <state key="normal" image="paperplane" catalog="system">
                                                                     <color key="titleColor" systemColor="labelColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="shareButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XQw-XI-fPh"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0s-H2-dXI" userLabel="SaveButton">
                                                                 <rect key="frame" x="55" y="0.0" width="55" height="35"/>
@@ -262,8 +265,8 @@
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
                             <constraint firstItem="XwP-GQ-raj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="D87-8i-QiH"/>
-                            <constraint firstItem="XwP-GQ-raj" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="E2Y-1h-END"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XwP-GQ-raj" secondAttribute="trailing" constant="5" id="WkT-5X-GgL"/>
+                            <constraint firstItem="XwP-GQ-raj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="gKM-0f-D09"/>
                             <constraint firstItem="XwP-GQ-raj" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="mlW-IC-c5X"/>
                         </constraints>
                     </view>
@@ -278,6 +281,7 @@
                         <outlet property="saveButton" destination="P0s-H2-dXI" id="REK-6c-d3S"/>
                         <outlet property="separator1" destination="uzQ-vT-gfD" id="FUF-Cv-DXs"/>
                         <outlet property="separator2" destination="aXe-Ci-Dri" id="AOJ-L8-I9J"/>
+                        <outlet property="shareButton" destination="VVv-pS-XP7" id="AEU-N6-1gc"/>
                         <outlet property="timeLabel" destination="A2t-cg-3h2" id="fG0-5f-aZV"/>
                         <outlet property="titleLabel" destination="SDc-E0-aCe" id="ZiH-QM-JCO"/>
                         <outlet property="upvoteButton" destination="j6I-Hl-Y4J" id="yaO-jo-aew"/>

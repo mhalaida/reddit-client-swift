@@ -10,6 +10,7 @@ import UIKit
 let freshPostsSaved = Notification.Name("freshPostsSaved")
 let freshCommentsSaved = Notification.Name("freshCommentsSaved")
 private let toPostDetailsIdentifier = "toPostDetails"
+let globalSubreddit = "pics";
 
 class PostListViewController: UITableViewController, UISearchResultsUpdating {
     
@@ -23,7 +24,7 @@ class PostListViewController: UITableViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(triggerPostListUpdate), name: freshPostsSaved, object: nil);
-        UseCase.requestPosts(subreddit: "pics", listingType: "top", limit: 150);
+        UseCase.requestPosts(subreddit: globalSubreddit, listingType: "top", limit: 150);
         
         navigationItem.title = "r/pics"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "archivebox"), style: .plain, target: self, action: #selector(toggleFilter))

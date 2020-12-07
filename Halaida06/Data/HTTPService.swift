@@ -33,8 +33,9 @@ class HTTPService {
                 resStr += "after=\(after!)";
             };
         case .Comment(let subreddit, let postId):
-            resStr += "www.reddit.com/r/\(subreddit)/comments/\(postId)/.json"
+            resStr += "www.reddit.com/r/\(subreddit)/comments/\(postId).json"
         };
+        print(resStr)
         //other APIs can be handled here
         return resStr;
     };
@@ -51,7 +52,6 @@ class HTTPService {
     static func makeCommentRequest(source: RedditSource) {
         HTTPRequester.requestGET(urlStr: generateURL(source: source), completionHandler: { data in
             if let data = data {
-//                print(data);
                 saveCommentsResponse(respData: data)
             }
         })
@@ -64,15 +64,8 @@ class HTTPService {
     }
     
     static func saveCommentsResponse(respData: Data) {
-        PersistenceManager.shared.freshComments = RedditRepository.processRedditCommentRaw(rawResJSON: RedditRepository.decodeComment(respData: respData) ?? [RedditCommentRaw]());
+        PersistenceManager.shared.freshComments = RedditRepository.processRedditCommentRaw(rawResJSON: RedditRepository.decodeComment(respData: respData) ?? RedditCommentRaw(data: RedditCommentRaw.DataStruct(children: [])));
         NotificationCenter.default.post(Notification(name: freshCommentsSaved))
-        print(PersistenceManager.shared.freshComments)
-//        var bruh = RedditRepository.decodeComment(respData: respData);
-//        bruh?.removeFirst();
-//        print(bruh)
-//        print(RedditRepository.decodeCommentBruh(respData: bruh));
-//        PersistenceManager.shared.freshComments = RedditRepository.processRedditRespRaw(rawResJSON: RedditRepository.decode(respData: respData) ?? RedditPostRaw(data: RedditPostRaw.DataStruct(children: [])));
-//        NotificationCenter.default.post(Notification(name: freshPostsSaved))
     }
 
 }

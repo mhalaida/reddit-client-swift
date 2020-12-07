@@ -9,15 +9,14 @@ import SwiftUI
 
 struct CommentListView: View {
     
-    @EnvironmentObject var persistence: PersistenceManager
+    var comments: [RedditComment]
     
     var body: some View {
-//        List(persistence.freshComments, id: \.id) { comment in
-//            CommentRowView(comment: comment)
-//        }
         List {
-            ForEach(persistence.freshComments) {comment in
+            ForEach(comments) {comment in
                 CommentRowView(comment: comment)
+                    .listRowInsets(EdgeInsets())
+                    .padding(5)
             }
         }
     }
@@ -25,7 +24,7 @@ struct CommentListView: View {
 
 struct CommentListView_Previews: PreviewProvider {
     static var previews: some View {
-        CommentListView()
+        CommentListView(comments: PersistenceManager.shared.freshComments)
             .preferredColorScheme(.dark)
     }
 }
