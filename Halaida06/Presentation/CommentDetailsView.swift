@@ -33,17 +33,16 @@ struct CommentDetailsView: View {
             }
             .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: 25, alignment: .topLeading)
             Text(comment.body ?? "")
-                .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity,/* minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity, */alignment: .topLeading)
+                .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity, alignment: .topLeading)
                 .padding(5)
                 .foregroundColor(.white)
-                .allowsTightening(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             Button(action: {
                 self.shareAction();
             }) {
                 Text("Share")
                     .foregroundColor(.white)
                     .fontWeight(.bold)
-                    .frame(width: 300, height: 300, alignment: .center/* minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity,/* minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity, */alignment: .topLeading*/)
+                    .frame(width: 300, height: 300, alignment: .center)
             }
             .frame(width: 300, height: 50)
             .background(Color(UIColor.systemOrange))
