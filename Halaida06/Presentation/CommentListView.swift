@@ -14,9 +14,18 @@ struct CommentListView: View {
     var body: some View {
         List {
             ForEach(comments) {comment in
-                CommentRowView(comment: comment)
+                ZStack {
+                    CommentRowView(comment: comment)
+                        .listRowInsets(EdgeInsets())
+                        .padding(5)
+                    NavigationLink(destination: CommentDetailsView(comment: comment)) {
+                        EmptyView()
+                    }
+                    .opacity(0.0)
+                    .buttonStyle(PlainButtonStyle())
                     .listRowInsets(EdgeInsets())
-                    .padding(5)
+                }
+                .listRowBackground(Color(UIColor.systemGray5))
             }
         }
     }

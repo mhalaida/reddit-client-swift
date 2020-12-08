@@ -1,18 +1,17 @@
 //
-//  CommentRowView.swift
-//  Halaida09
+//  CommentDetailsView.swift
+//  Halaida06
 //
-//  Created by Mykhailo Halaida on 06.12.2020.
+//  Created by Mykhailo Halaida on 07.12.2020.
 //
 
 import SwiftUI
 
-struct CommentRowView: View {
+struct CommentDetailsView: View {
     
     // MARK: – Data
     var comment: RedditComment
     
-    // MARK: – View
     var body: some View {
         VStack {
             HStack {
@@ -34,12 +33,35 @@ struct CommentRowView: View {
             }
             .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: 25, alignment: .topLeading)
             Text(comment.body ?? "")
-                .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: 75, alignment: .topLeading)
+                .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity,/* minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity, */alignment: .topLeading)
                 .padding(5)
                 .foregroundColor(.white)
+                .allowsTightening(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+            Button(action: {
+                self.shareAction();
+            }) {
+                Text("Share")
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .frame(width: 300, height: 300, alignment: .center/* minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity,/* minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity, */alignment: .topLeading*/)
+            }
+            .frame(width: 300, height: 50)
+            .background(Color(UIColor.systemOrange))
+            .cornerRadius(5)
+            .padding(10)
         }
         .listRowBackground(Color(UIColor.systemGray5))
+        .background(Color(UIColor.separator))
         .cornerRadius(5)
+        .padding(20)
+    }
+    
+    func shareAction() {
+        print(comment)
+        let items = [URL(string: comment.permalink ?? "https://www.reddit.com")];
+        let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil);
+        UIApplication.shared.windows.first?.rootViewController?.present(ac, animated: true, completion: nil)
+        
     }
     
     func formatRating(rawRating: Int) -> String {
@@ -73,13 +95,13 @@ struct CommentRowView: View {
     }
 }
 
-struct CommentRowView_Previews: PreviewProvider {
+struct CommentDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         CommentRowView(comment: RedditComment(
                         id: "228",
                         author: "u/bruh_bruhson",
                         created_utc: 51346,
-                        body: "Bruh bruh bruh bruh bruh bruh bruh rubh rubhrubh rubh",
+                        body: "Bruh bruh bruh bruh bruh bruh bruh rubh rubhrubh rubh Bruh bruh bruh bruh bruh bruh bruh rubh rubhrubh rubh Bruh bruh bruh bruh bruh bruh bruh rubh rubhrubh rubh Bruh bruh bruh bruh bruh bruh bruh rubh rubhrubh rubh Bruh bruh bruh bruh bruh bruh bruh rubh rubhrubh rubh Bruh bruh bruh bruh bruh bruh bruh rubh rubhrubh rubh Bruh bruh bruh bruh bruh bruh bruh rubh rubhrubh rubh ",
                         ups: 322,
                         downs: 0))
             .preferredColorScheme(.dark)

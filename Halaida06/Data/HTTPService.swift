@@ -65,6 +65,10 @@ class HTTPService {
     
     static func saveCommentsResponse(respData: Data) {
         PersistenceManager.shared.freshComments = RedditRepository.processRedditCommentRaw(rawResJSON: RedditRepository.decodeComment(respData: respData) ?? RedditCommentRaw(data: RedditCommentRaw.DataStruct(children: [])));
+        print(PersistenceManager.shared.freshComments)
+        if (PersistenceManager.shared.freshComments.last?.author == "") {
+            PersistenceManager.shared.freshComments.removeLast();
+        }
         NotificationCenter.default.post(Notification(name: freshCommentsSaved))
     }
 

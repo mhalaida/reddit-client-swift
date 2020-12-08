@@ -11,6 +11,7 @@
 		5975236F257292DC002F85D9 /* ThreadSafeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5975236E257292DC002F85D9 /* ThreadSafeWrapper.swift */; };
 		5983091025725B3800C938B6 /* PostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5983090F25725B3800C938B6 /* PostListViewController.swift */; };
 		5983091325725C3D00C938B6 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5983091225725C3D00C938B6 /* PostTableViewCell.swift */; };
+		598E7CFC257ED2A600DD2854 /* CommentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598E7CFB257ED2A600DD2854 /* CommentDetailsView.swift */; };
 		599CA085257E94D800E242A4 /* CommentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599CA084257E94D800E242A4 /* CommentListView.swift */; };
 		59D4BD35254EFB4300B1B3AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D4BD34254EFB4300B1B3AB /* AppDelegate.swift */; };
 		59D4BD37254EFB4300B1B3AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D4BD36254EFB4300B1B3AB /* SceneDelegate.swift */; };
@@ -31,6 +32,7 @@
 		5975236E257292DC002F85D9 /* ThreadSafeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeWrapper.swift; sourceTree = "<group>"; };
 		5983090F25725B3800C938B6 /* PostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewController.swift; sourceTree = "<group>"; };
 		5983091225725C3D00C938B6 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		598E7CFB257ED2A600DD2854 /* CommentDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDetailsView.swift; sourceTree = "<group>"; };
 		599CA084257E94D800E242A4 /* CommentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListView.swift; sourceTree = "<group>"; };
 		59D4BD31254EFB4300B1B3AB /* Bruhddit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bruhddit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59D4BD34254EFB4300B1B3AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				59D4BD36254EFB4300B1B3AB /* SceneDelegate.swift */,
 				595CC713257D79EF00386272 /* CommentRowView.swift */,
 				599CA084257E94D800E242A4 /* CommentListView.swift */,
+				598E7CFB257ED2A600DD2854 /* CommentDetailsView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				5975236F257292DC002F85D9 /* ThreadSafeWrapper.swift in Sources */,
 				59D4BD63254F003B00B1B3AB /* UseCase.swift in Sources */,
 				59D4BD5E254EFEF500B1B3AB /* HTTPService.swift in Sources */,
+				598E7CFC257ED2A600DD2854 /* CommentDetailsView.swift in Sources */,
 				599CA085257E94D800E242A4 /* CommentListView.swift in Sources */,
 				59D4BD39254EFB4300B1B3AB /* PostDetailsViewController.swift in Sources */,
 				59D4BD35254EFB4300B1B3AB /* AppDelegate.swift in Sources */,

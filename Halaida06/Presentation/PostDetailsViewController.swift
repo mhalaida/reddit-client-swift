@@ -94,6 +94,7 @@ class PostDetailsViewController: UIViewController {
     
     func configureCommentsView() {
         DispatchQueue.main.async {
+            self.commentsView.view.backgroundColor = UIColor.systemGray5;
             self.commentsView.view.translatesAutoresizingMaskIntoConstraints = false
             self.commentsView.view.topAnchor.constraint(equalTo: self.view.subviews[0].bottomAnchor).isActive = true
             self.commentsView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
